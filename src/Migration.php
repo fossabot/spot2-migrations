@@ -28,7 +28,7 @@ class Migration implements MigrationInterface
     public function __construct(Locator $locator, string $path = null)
     {
         $this->locator = $locator;
-        $this->path = $path ?: dirname(__DIR__, 3);
+        $this->path = $path ?: dirname(__DIR__, 4);
     }
 
     /**
@@ -111,7 +111,12 @@ class Migration implements MigrationInterface
     private function getAllMappers(): array
     {
         foreach ($this->getFinder()->getIterator() as $file) {
-            include_once $file->getRealPath();
+            try {
+                echo $file->getRealPath() . "\n";
+                include_once $file->getRealPath();
+            } catch (\Exception $exception) {
+
+            }
         }
 
         $mappers = [];
@@ -139,7 +144,8 @@ class Migration implements MigrationInterface
         $finder->files()
             ->in($this->path)
             ->name('/\.php$/')
-            ->contains('Entity');
+            ->exclude('/.*vendor\/.*/')
+            ->contains('Spot\\Entity');
 
         return $finder;
     }

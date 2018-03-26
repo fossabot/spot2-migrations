@@ -111,12 +111,7 @@ class Migration implements MigrationInterface
     private function getAllMappers(): array
     {
         foreach ($this->getFinder()->getIterator() as $file) {
-            try {
-                echo $file->getRealPath() . "\n";
-                include_once $file->getRealPath();
-            } catch (\Exception $exception) {
-
-            }
+            include_once $file->getRealPath();
         }
 
         $mappers = [];

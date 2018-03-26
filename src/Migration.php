@@ -60,11 +60,11 @@ class Migration implements MigrationInterface
         $queries = [];
 
         foreach ($this->getAllMappers() as $mapper) {
-            $table = $mapper->entity()->table();
+            $table = $mapper->table();
             $connection = $mapper->connection();
             $schemaManager = $connection->getSchemaManager();
 
-            if (false === $schemaManager->tablesExist($table)) {
+            if (false === $schemaManager->tablesExist([$table])) {
                 // Create new table
                 $newSchema = $mapper->resolver()->migrateCreateSchema();
                 $queries += $newSchema->toSql($connection->getDatabasePlatform());
@@ -91,11 +91,10 @@ class Migration implements MigrationInterface
         $queries = [];
 
         foreach ($this->getAllMappers() as $mapper) {
-            $table = $mapper->entity()->table();
-
+            $table = $mapper->table();
             $schemaManager = $mapper->connection()->getSchemaManager();
 
-            if ($schemaManager->tablesExist($table)) {
+            if ($schemaManager->tablesExist([$table])) {
                 $queries []= $schemaManager->getDatabasePlatform()->getDropTableSQL($table);
             }
         }

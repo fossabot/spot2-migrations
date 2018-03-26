@@ -1,0 +1,27 @@
+{
+  "name": "coisa/spot2-migrations",
+  "description": "Database Schema migrations using Spot DataMapper",
+  "type": "library",
+  "require": {
+    "php": "^7.1",
+    "vlucas/spot2": "^2.2",
+    "symfony/finder": "^4.0"
+  },
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Felipe Sayão Lobato Abreu",
+      "email": "contato@felipeabreu.com.br"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "CoiSA\\Spot\\Migration\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}

@@ -47,7 +47,7 @@ class Migration implements MigrationInterface
             $queries += $schema->toSql($mapper->connection()->getDatabasePlatform());
         }
 
-        return implode("\n", $queries);
+        return implode(";\n", $queries) . ';';
     }
 
     /**
@@ -78,7 +78,7 @@ class Migration implements MigrationInterface
             }
         }
 
-        return implode("\n", $queries);
+        return implode(";\n", $queries) . ';';
     }
 
     /**
